@@ -84,3 +84,22 @@ if 'year_of_establishment' in df2.columns:
     st.plotly_chart(fig_line, use_container_width=True)
 else:
     st.warning("The dataset does not contain 'year_of_establishment'.")
+
+# Dynamic Box Plot Section
+st.subheader("Custom Box Plot")
+
+num_cols = df2.select_dtypes(include='number').columns.tolist()
+cat_cols = df2.select_dtypes(include='object').columns.tolist()
+
+box_y = st.selectbox("Select numerical variable (Y-axis)", num_cols)
+box_x = st.selectbox("Select categorical variable (X-axis)", cat_cols)
+
+fig_custom_box = px.box(
+    df2,
+    x=box_x,
+    y=box_y,
+    title=f"Box Plot: {box_y} by {box_x}",
+    template="plotly_white"
+)
+
+st.plotly_chart(fig_custom_box, use_container_width=True)
