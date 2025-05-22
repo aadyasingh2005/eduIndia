@@ -5,13 +5,19 @@ import streamlit as st
 import plotly.express as px
 import seaborn as sns
 import matplotlib.pyplot as plt
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-st.set_page_config(page_title="UDISE School Infra Dashboard", layout="wide")
+from visualizations.linegraph import plot_schools_established_over_years
+
+
+st.set_page_config(page_title="Bangalore Urban School Data", layout="wide")
 
 # Load dataset
-df = pd.read_csv("C:\\Users\\aadya\\eduIndia\\Python project\\data\\Bengaluru_Urban_North_Facilities.csv")
+df = pd.read_csv("..\data\Bengaluru_Urban_North_Facilities.csv")
 
-st.title("UDISE+ 2021–22 Infrastructure Dashboard")
+st.title("Bengaluru Urban School Data Visualisation (using USIDE+ data)")
 
 # Sidebar filters
 st.sidebar.header("Filter by")
@@ -69,3 +75,12 @@ fig_scatter = px.scatter(
 
 st.plotly_chart(fig_scatter, use_container_width=True)
 
+df2=pd.read_csv("../data/Bengaluru_Urban_North_Profile_Part1.csv")
+# --- Line Graph Section: School Establishment Trends ---
+st.subheader("Number of Schools Established Over Time")
+
+if 'year_of_establishment' in df2.columns:
+    fig_line = plot_schools_established_over_years(df2)
+    st.plotly_chart(fig_line, use_container_width=True)
+else:
+    st.warning("The dataset does not contain 'year_of_establishment'.")

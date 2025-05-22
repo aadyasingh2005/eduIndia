@@ -4,7 +4,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-df = pd.read_csv("../data/udise_2021_22.csv")
+df = pd.read_csv("..\data\Bengaluru_Urban_North_Facilities.csv")
 
 # Heatmap for classroom quality
 room_cols = [

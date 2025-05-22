@@ -3,7 +3,7 @@
 import pandas as pd
 import plotly.express as px
 
-df = pd.read_csv("C:\\Users\\aadya\\eduIndia\\Python project\\data\\Bengaluru_Urban_North_Facilities.csv")
+df = pd.read_csv("..\data\Bengaluru_Urban_North_Facilities.csv")
 
 # Barplot for drinking water availability
 fig = px.histogram(df, x="drinking_water_available", title="Drinking Water Availability in Schools")
